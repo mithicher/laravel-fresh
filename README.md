@@ -11,6 +11,8 @@ git clone https://github.com/mithicher/laravel-fresh.git
 composer install
 
 npm install && npm run dev
+
+php artisan storage:link
 ```
 
 Configure the database with your credentials

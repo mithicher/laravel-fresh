@@ -36,6 +36,24 @@
                     <option value="{{ $roleKey }}">{{ Str::title($roleValue) }}</option>
                 @endforeach
             </x-select>
+
+            <div class="mb-5">
+                <x-label for="gender-input" class="mb-1">Gender</x-label>
+
+                <div class="space-y-2">
+                    <x-radio label="Male" id="male" name="gender" value="male" wire:model.defer="gender" checked />
+                    <x-radio label="Female" id="female" name="gender" value="female" wire:model.defer="gender" />
+                </div>
+
+                <x-input-error for="gender" class="mt-1" />
+            </div>
+
+            <x-input-number
+                type="tel"
+                label="Phone" 
+                name="phone"
+                wire:model.defer="phone" 
+            />
      
             <x-slot name="footer">
                 <div class="mr-4">

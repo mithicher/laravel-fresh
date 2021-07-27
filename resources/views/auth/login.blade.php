@@ -6,9 +6,9 @@
                     <x-application-logo class="mx-auto w-20 h-20" />
                 </a>       
             </div>
-
-            <x-heading>Login to get started.</x-heading>
         </x-slot>
+
+        <x-heading class="mb-4">Login to get started.</x-heading>
 
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />
@@ -23,15 +23,17 @@
 
             <!-- Password -->
             <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
-
-                @if (Route::has('password.request'))
-                    <div class="mb-1.5">
-                        <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                            {{ __('Forgot your password?') }}
-                        </a>
-                    </div>
-                @endif
+                <div class="flex justify-between">
+                    <x-label for="password" :value="__('Password')" />
+    
+                    @if (Route::has('password.request'))
+                        <div class="mb-1.5">
+                            <a tabindex="3" class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
+                                {{ __('Forgot your password?') }}
+                            </a>
+                        </div>
+                    @endif
+                </div>
 
                 <x-input-password id="password"
                                 type="password"

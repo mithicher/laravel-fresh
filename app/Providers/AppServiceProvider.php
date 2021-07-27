@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Livewire\Component;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
@@ -40,6 +41,16 @@ class AppServiceProvider extends ServiceProvider
                 'type' => $messageType,
                 'text' => $message
             ]);
+        });
+
+        Str::macro('arrayToHtmlAttributes', function($array) {
+            // return str_replace("=", '=', http_build_query($data, null, ' ', PHP_QUERY_RFC3986)).'';
+        
+            $tag = '';
+            foreach ($array as $key => $value) {
+                $tag .= $key . '=' . htmlspecialchars($value) . ' ';
+            }
+            return $tag;
         });
 
         Gate::before(function ($user, $ability) {

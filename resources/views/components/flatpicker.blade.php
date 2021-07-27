@@ -1,4 +1,4 @@
-@props(array_merge([
+@props([
 	'defaultValue' => null,
 	'enableTime' => false,
     'dateFormat' => 'Y-m-d',
@@ -13,7 +13,7 @@
 	'optional' => false,
 	'noMargin' => false,
 	'readonly' => false
-], $extraAttributes ?? []))
+])
 
 @php
 $errorClass = $errors->has($name) ? 'border-red-300' : 'border-gray-300';

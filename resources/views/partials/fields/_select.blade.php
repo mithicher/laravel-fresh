@@ -8,7 +8,7 @@
 	>
 		<option value="" disabled selected>Select an option</option>
 		@foreach ($field->options as $optionKey => $optionValue)
-			<option value="{{ $optionKey }}">{{ $optionValue }}</option>
+			<option value="{{ $optionKey }}">{{ Str::replace('_', ' ', Str::title($optionValue)) }}</option>
 		@endforeach
 	</x-select>
 </div>

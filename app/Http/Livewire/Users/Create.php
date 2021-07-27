@@ -3,9 +3,11 @@
 namespace App\Http\Livewire\Users;
 
 use App\Models\User;
-use App\Traits\WithFormFieldValidate;
 use Livewire\Component;
+use Illuminate\Validation\Rule;
 use Spatie\Permission\Models\Role;
+use App\Rules\CheckValidPhoneNumber;
+use App\Traits\WithFormFieldValidate;
 
 class Create extends Component
 {
@@ -14,6 +16,8 @@ class Create extends Component
     public $name;
     public $email;
     public $role = "";
+    public $gender = "male";
+    public $phone;
 
     public function getRolesProperty() 
     {
@@ -33,6 +37,8 @@ class Create extends Component
         $user = User::create([
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
+            'gender' => $validatedData['gender'],
+            'phone' => $validatedData['phone'],
             'password' => bcrypt('secret')
         ]);
 
@@ -70,7 +76,27 @@ class Create extends Component
                 "validation_rules" => ["required"],
                 "name" => "role",
                 "options" => $this->roles
-            ]
+            ],
+
+            [
+                "width" => "auto",
+                "type" => "radio",
+                "validation_rules" => ["required", Rule::in(['male', 'female'])],
+                "name" => "gender",
+                "initial_checked_value" => "male",
+                "options" => [
+                    'male' => 'Male',
+                    'female' => 'Female'
+                ]
+            ],
+
+            [
+                "width" => "auto",
+                "type" => "phone",
+                "validation_rules" => ["required", new CheckValidPhoneNumber],
+                "name" => "phone"
+            ],
+
         ];
     }
 

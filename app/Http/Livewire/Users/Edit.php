@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Users;
 
 use App\Models\User;
+use App\Rules\CheckValidPhoneNumber;
 use Livewire\Component;
 use Spatie\Permission\Models\Role;
 use Illuminate\Validation\Rule;
@@ -12,6 +13,8 @@ class Edit extends Component
     public $name;
     public $email;
     public $role = '';
+    public $gender = 'male';
+    public $phone;
 
     public $user;
 
@@ -21,6 +24,8 @@ class Edit extends Component
 
         $this->name = $this->user->name;
         $this->email = $this->user->email;
+        $this->gender = $this->user->gender ?? 'male';
+        $this->phone = $this->user->phone ?? null;
 
         $this->role = $this->user->roles()->pluck('id')[0] ?? '';
     }
@@ -35,6 +40,8 @@ class Edit extends Component
                 Rule::unique('users')->ignore($this->user->id),
             ],
             'role' => ['required'],
+            'gender' => ['sometimes'],
+            'phone' => ['sometimes', new CheckValidPhoneNumber],
         ]);
 
         $this->user->update([

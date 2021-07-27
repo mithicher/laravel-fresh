@@ -22,7 +22,8 @@
 		
 		{{
 			$attributes->merge([
-				'class' => 'form-radio focus:outline-none border-gray-300 h-4 w-4 ' . $themeColors
+				'class' => 'form-radio focus:outline-none border-gray-300 h-4 w-4 ' . $themeColors,
+
 			])
 		}}
 		 
@@ -34,7 +35,5 @@
 			checked
 		@endif
 	>
-	<label for="{{ $id }}" class="ml-3 block text-sm font-medium text-gray-700">
-		{{ $label ?? $slot }}
-	</label>
+	<label for="{{ $id }}" class="ml-3 block text-sm font-medium text-gray-700">{{ $label ?? $slot }}</label>
 </div>
