@@ -1,0 +1,36 @@
+#!/bin/sh
+
+# path to your project directory
+cd /var/www/project-folder
+
+# Terminate execution if any command fails
+set -e
+
+echo "website shutting done..."
+php artisan down || true
+
+echo "pulling fresh content from git..."
+git pull origin master
+
+echo "checking any new package via composer..."
+composer install --no-interaction --prefer-dist --optimize-autoloader
+
+echo "migrating any new database if available..."
+php artisan migrate --force
+
+echo "clearing cache..."
+php artisan cache:clear
+
+php artisan route:clear
+
+# echo "restarting queue..."
+# php artisan queue:restart
+
+php artisan route:cache
+
+php artisan config:cache
+
+php artisan view:cache
+
+echo "website starting up..."
+php artisan up
