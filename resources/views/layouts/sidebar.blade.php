@@ -20,7 +20,7 @@
 
 		<x-slot name="footer">
 			<div class="px-4 py-2">
-				<a href="{{ route('profile') }}" class="flex px-2 py-2 hover:bg-gray-900 rounded-lg {{ request()->is('profile') ? 'bg-gray-900' : '' }}">
+				<a href="{{ route('profile') }}" class="flex px-2 py-2 hover:bg-gray-700 rounded-lg {{ request()->is('profile') ? 'bg-gray-700' : '' }}">
 					<livewire:profile-button />
 				</a>
 				<x-nav-item to="#" class="flex items-center mt-1 py-2 text-gray-100" onclick="event.preventDefault(); document.getElementById('js-sidebar-logout').submit()">

@@ -1,9 +1,4 @@
 @props([
-	'defaultValue' => null,
-	'enableTime' => false,
-    'dateFormat' => 'Y-m-d',
-    'noCalendar' => false,
-    'theme' => 'airbnb',
 	'id' => null,
 	'label' => null,
 	'name' => null,
@@ -12,34 +7,36 @@
 	'errorMessageFor' => null,
 	'optional' => false,
 	'noMargin' => false,
-	'readonly' => false
+	'readonly' => false,
+	'disabled' => false,
+	'options' => [],
+	'theme' => 'airbnb',
+	'themeColor' => '#6366F1'
 ])
 
 @php
-$errorClass = $errors->has($name) ? 'border-red-300' : 'border-gray-300';
-$readonlyClass = $readonly ? 'bg-gray-100' : 'bg-white';
+$readonlyClass = $readonly ? 'bg-gray-50' : 'bg-white';
 
-$options = [
-	'dateFormat' =>  $dateFormat,
-	'defaultDate' => $defaultValue ?? now(),
-	'altInput' => $enableTime == false ? true : false,
-	'altFormat' => $enableTime == false ? 'F j, Y' : '',
-
-	'enableTime' => $enableTime,
-	'noCalendar' => $noCalendar,
-];
+$dateoptions = array_merge([
+	'defaultDate' => now(),
+	'enableTime' => false,
+    'dateFormat' => 'Y-m-d',
+    'noCalendar' => false,
+	'altInput' => true,
+	'altFormat' => 'F j, Y',
+], $options);
 @endphp
 
-<div class="{{ $noMargin ? 'mb-0' : 'mb-5' }}">
+<div class="{{ $noMargin ? 'mb-0' : 'mb-5' }} {{ $errors->has($name) ? 'has-error' : '' }}">
 	@if($label)
 		<x-label class="mb-1" for="{{ $name }}" :optional="$optional">{{ $label }}</x-label>
     @endif
 
 	<div
 		class="relative"
-		x-data
+		x-data="{ fp: null }"
 		x-init='
-			fp = flatpickr($refs.input, @json($options));
+			fp = flatpickr($refs.input, {{ collect($dateoptions) }});
 			fp.onChange = (selectedDates, dateStr, instance) => {
 		        $refs.input.value = dateStr
 		    }
@@ -50,9 +47,13 @@ $options = [
 		<input 
 			type="text" 
 			x-ref="input" 
+			id="{{ $id ?? $name }}" 
+			name="{{ $name }}"
+			{{ $readonly ? 'readonly=readonly' : '' }}
+			{{ $disabled ? 'disabled=disabled' : '' }}
 			
 			{{ $attributes->merge([
-				'class' => 'form-input transition duration-150 ease-in-out pl-3 pr-4 py-2 block w-full text-gray-700 font-sans rounded-lg text-left focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 shadow-sm border sm:text-sm placeholder-gray-400 ' . $errorClass . ' ' . $readonlyClass
+				'class' => 'form-input transition duration-150 ease-in-out pl-3 pr-4 py-2 block w-full text-gray-700 font-sans rounded-lg text-left focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 shadow-sm border sm:text-sm placeholder-gray-400 disabled:bg-gray-50 border-gray-300 ' . $readonlyClass
 			]) }}
 
 			@if ($attributes->has('wire:model'))
@@ -82,12 +83,15 @@ $options = [
 
 @once
 	@push('styles')
-		@if ($theme === 'airbnb')
+		@isset($theme)
 			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/themes/airbnb.css">
 		@else
 			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/flatpickr.min.css">
-		@endif
+		@endisset
 		<style>
+			.has-error .form-input {
+				border-color: rgba(252, 165, 165, 1.0);
+			}
 			.flatpickr-day.selected,
 			.flatpickr-day.startRange,
 			.flatpickr-day.endRange,
@@ -106,8 +110,8 @@ $options = [
 			.flatpickr-day.selected.nextMonthDay,
 			.flatpickr-day.startRange.nextMonthDay,
 			.flatpickr-day.endRange.nextMonthDay {
-				background: #6366F1;
-				border-color: #6366F1;
+				background: {{ $themeColor }};
+				border-color: {{ $themeColor }};
 			}
 		</style>
 	@endpush

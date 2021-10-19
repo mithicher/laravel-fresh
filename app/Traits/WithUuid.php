@@ -6,10 +6,10 @@ use Illuminate\Support\Str;
 
 trait WithUuid
 {
-    protected static function booted()
+    protected static function bootWithUuid()
     {
         static::creating(function ($model) {
-            $model->uuid = Str::uuid();
+            $model->uuid = Str::uuid()->toString();
         });
     }
 }

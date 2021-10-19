@@ -30,7 +30,7 @@
 		}"
 			
 		:class="{ 'outline-none border-indigo-500 ring-1 ring-indigo-500': focused === true }" 
-		class="form-textarea relative leading-none transition duration-150 ease-in-out px-3 py-2 block w-full text-gray-700 font-sans rounded-lg text-left shadow-sm border sm:text-sm placeholder-gray-400 {{ $errors->has($name) ? ' border-red-300 ' : ' border-gray-300 ' }}"
+		class="form-textarea bg-white relative leading-none transition duration-150 ease-in-out px-3 py-2 block w-full text-gray-700 font-sans rounded-lg text-left shadow-sm border sm:text-sm placeholder-gray-400 {{ $errors->has($name) ? ' border-red-300 ' : ' border-gray-300 ' }}"
 	>
 		<textarea 
 			wire:ignore 

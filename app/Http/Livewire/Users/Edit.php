@@ -54,7 +54,7 @@ class Edit extends Component
 
         $this->user->refresh();
 
-        $this->bannerMessage('User created');
+        $this->bannerMessage('User updated.');
     }
 
     public function getRolesProperty() 

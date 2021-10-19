@@ -20,8 +20,8 @@
         <livewire:styles />
         @stack('styles')
 
-        <livewire:scripts />   
-        <script src="https://unpkg.com/alpinejs@3.2.1/dist/cdn.min.js" defer></script>
+        <livewire:scripts />
+        <script src="https://unpkg.com/alpinejs@3.4.2/dist/cdn.min.js" defer></script>
         @stack('scripts')
     </head>
     <body class="bg-gray-100 antialiased font-sans text-gray-600">

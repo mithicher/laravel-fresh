@@ -10,12 +10,13 @@
 	'appendAfter' => null,
 	'appendBefore' => null,
 	'readonly' => false,
+	'disabled' => false,
 	'type' => 'text'
 ])
 
 @php
 	$errorClass = $errors->has($name) ? 'border-red-300' : 'border-gray-300';
-	$readonlyClass = $readonly ? 'bg-gray-100' : 'bg-white';
+	$readonlyClass = $readonly ? 'bg-gray-50' : 'bg-white';
 @endphp
 
 <div class="{{ $noMargin ? 'mb-0' :  'mb-5' }}">	
@@ -37,9 +38,12 @@
 				id="{{ $id ?? $name }}" 
 				type="{{ $type }}"
 				name="{{ $name }}"
+
+				{{ $readonly ? 'readonly=readonly' : '' }}
+				{{ $disabled ? 'disabled=disabled' : '' }}
 	
 				{{ $attributes->merge([
-					'class' => 'form-input transition duration-150 ease-in-out px-3 py-2 block w-full text-gray-700 font-sans rounded-lg text-left focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 shadow-sm border sm:text-sm placeholder-gray-400 ' . $errorClass . ' ' . $readonlyClass
+					'class' => 'form-input transition duration-150 ease-in-out px-3 py-2 block w-full text-gray-700 font-sans rounded-lg text-left focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 shadow-sm border sm:text-sm placeholder-gray-400 disabled:bg-gray-50 ' . $errorClass . ' ' . $readonlyClass
 				]) }}
 
 				@if ($attributes->has('wire:model'))

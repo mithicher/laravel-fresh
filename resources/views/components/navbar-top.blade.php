@@ -1,6 +1,6 @@
 <div class="shadow-sm bg-white relative z-10">
 	<x-section-centered>
-		<div class="flex flex-1 items-center h-12">
+		<div class="flex flex-1 items-center h-16">
 			@isset($action)
 				<div class="mr-3">
 					{{ $action}}

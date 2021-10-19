@@ -12,7 +12,7 @@
         @stack('styles')
 
         <!-- Scripts -->
-        <script src="https://unpkg.com/alpinejs@3.2.1/dist/cdn.min.js" defer></script>
+        <script src="https://unpkg.com/alpinejs@3.4.2/dist/cdn.min.js" defer></script>
         @stack('scripts')
     </head>
     <body>
