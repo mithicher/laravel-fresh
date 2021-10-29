@@ -2,6 +2,7 @@
 
 use App\Http\Livewire\Roles;
 use App\Http\Livewire\Users;
+use App\Http\Livewire\Events;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,6 +31,9 @@ Route::get('/users/{user}/edit', Users\Edit::class)->middleware(['auth'])->name(
 
 // Profile
 Route::view('profile', 'profile')->middleware(['auth'])->name('profile');
+
+// Events
+Route::get('/events/create', Events\Create::class)->name('events.create');
 
 // Roles & Permissions
 Route::get('/roles', Roles\Index::class)->middleware(['auth'])->name('roles');

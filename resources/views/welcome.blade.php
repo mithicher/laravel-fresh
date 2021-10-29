@@ -50,11 +50,6 @@
                         <x-application-logo class="h-16" />
                         <div class="font-semibold text-5xl ml-4 tracking-tighter">Laravel Fresh</div>
                     </div>
-        
-                    <div class="mt-1 text-gray-500 text-center">
-                        
-                    </div>
-                    {{-- <div class="text-6xl font-bold tracking-tight text-green-800 text-center">Laravel Fresh</div> --}}
                     <div class="text-sm tracking-wider font-medium uppercase text-gray-500 border-t mt-3 border-gray-300 text-center flex items-center">
                         <div class="bg-white px-4 inline-flex -mt-3 mx-auto">
                             A TALL stack admin panel starter

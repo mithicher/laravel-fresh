@@ -5,6 +5,7 @@ namespace App\Providers;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 
@@ -55,6 +56,10 @@ class AppServiceProvider extends ServiceProvider
 
         Gate::before(function ($user, $ability) {
             return $user->hasRole('Super Admin') ? true : null;
+        });
+
+        Blade::directive('date', function ($value) {
+            return "<?php echo ($value)->toFormattedDateString(); ?>";
         });
     }
 }

@@ -16,6 +16,10 @@
 			<x-iconic-lock class="mr-4 stroke-current text-gray-300 w-6 h-6"/>Roles
 		</x-nav-item>
 
+		<x-nav-item to="{{ route('events.create') }}" class="flex items-center py-2 text-gray-100">
+			<x-iconic-calendar class="mr-4 stroke-current text-gray-300 w-6 h-6"/>Events
+		</x-nav-item>
+
 		<div class="my-3"></div>
 
 		<x-slot name="footer">
