@@ -47,6 +47,9 @@
             </div>
 
             <div>
+                <div class="mb-5">
+                    <x-card-weather-forecast api-key="ff9b41622f994b1287a73535210809" poll="6000" />
+                </div>
                 <div>
                     <livewire:events.calendar />
                 </div>

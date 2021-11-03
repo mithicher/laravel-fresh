@@ -60,7 +60,7 @@
                             {{-- Event Dots --}}
                             <div class="mt-px flex space-x-0.5 justify-center absolute left-0 right-0 bottom-2">
                                 <template x-for="event in events.filter(e => new Date(e.event_date).toDateString() ===  new Date(year, month, date).toDateString() )">
-                                    <div class="w-1.5 h-1.5 rounded-full overflow-hidden mx-auto bg-red-500"></div>
+                                    <div class="flex-shrink-0 w-1.5 h-1.5 rounded-full overflow-hidden mx-auto bg-red-500"></div>
                                 </template>
                             </div>
                             {{-- ./Event Dots --}}
@@ -78,27 +78,23 @@
         <a href="#" class="text-indigo-600 text-sm font-semibold hover:underline">View All</a>
     </div>
 
-    <div>
-        @if(count($currentEvents) > 0)
-            <div class="space-y-2">
-                @foreach ($currentEvents as $event)
-                    <a href="#" class="no-underline block hover:opacity-75">
-                        <x-alertbox class="text-sm">
-                            <div class="-my-2">
-                                <strong class="block mb-1.5">{{ $event->event_name }}</strong>
-                                {{-- 12 hour format with uppercase AM/PM --}}
-                                <span class="text-gray-400 block">@date($event->event_date) {{ $event->event_time != '00:00:00' ? 'at ' . date('g:i A', strtotime($event->event_time)) : '' }}</span>
-                                <span class="text-gray-500">{{ $event->event_venue }}</span>
-                            </div>
-                        </x-alertbox>
-                    </a>
-                @endforeach
-            </div>
-        @else
+    <div class="space-y-2">
+        @forelse($currentEvents as $event)
+            <a href="#" class="no-underline block hover:opacity-75">
+                <x-alertbox class="text-sm">
+                    <div class="-my-2">
+                        <strong class="block mb-1.5">{{ $event->event_name }}</strong>
+                        {{-- 12 hour format with uppercase AM/PM --}}
+                        <span class="text-gray-500 block">@date($event->event_date) {{ $event->event_time != '00:00:00' ? 'at ' . date('g:i A', strtotime($event->event_time)) : '' }}</span>
+                        <span class="text-gray-500">{{ $event->event_venue }}</span>
+                    </div>
+                </x-alertbox>
+            </a>
+        @empty
             <x-card-empty>No events</x-card-empty>
-        @endif
+        @endforelse
     </div>
-
+     
     @push('scripts')
     <script>
 		const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
